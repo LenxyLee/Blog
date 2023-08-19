@@ -35,6 +35,8 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '18'
+      - name:  Delete previous file
+        run: rm -rf public
       - name: Cache NPM dependencies
         uses: actions/cache@v2
         with:

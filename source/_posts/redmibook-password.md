@@ -1,5 +1,5 @@
 ---
-title: redmibook-password
+title: 红米Redmibook 17 Bios密码找回
 date: 2023-08-19 19:01:34
 tags: 踩坑日志
 ---

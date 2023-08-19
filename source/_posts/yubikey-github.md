@@ -12,7 +12,7 @@ tags: Yubikey的日常
 
 安装完毕gpg4win后打开Kleopatra
 
-![image-20230819223720958](../img/image-20230819223720958.png)
+![](../img/image-20230819223720958.png)
 
 ## 修改Yubikey的Admin PIN与PIN
 
@@ -91,3 +91,8 @@ git config --global user.signingkey 3AA5C34371567BD2
 git config --global commit.gpgsign true
 ```
 
+## 大功告成
+
+随后对commit即可对新的提交进行签名 同时在提交历史也可以看到本次是验证过的）
+
+![](../img/image-20230819231625612.png)

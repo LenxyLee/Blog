@@ -1005,7 +1005,7 @@ links:
       title: "HalfSweet's Blog",
       intro: "Try to create some value",
       link: "https://halfsweet.cn/",
-      avatar: "/img/favicon.png"
+      avatar: "https://halfsweet.cn/img/Headshot.jpg"
     }
 
 

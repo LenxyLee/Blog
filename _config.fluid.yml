@@ -959,7 +959,7 @@ about:
   icons:
     - { class: "iconfont icon-github-fill", link: "https://github.com/LenxyLee", tip: "GitHub" }
     - { class: "iconfont icon-twitter-fill", link: "https://twitter.com/fuzz_alin", tip: "Twitter" }
-    - { class: "iconfont icon-wechat-fill", qrcode: "/img/favicon.png" }
+    - { class: "iconfont icon-exp-fill", link: "https://rhinelab.io", tip: "LAB" }
 
 
 #---------------------------

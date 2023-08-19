@@ -18,4 +18,4 @@ tags: 踩坑日志
 
 点击Variable 找到SystemSupervisorPW 查看明文密码（对 bios里保存的是明文密码
 
-![Screenshot 2023-08-19 041645](../img/Screenshot 2023-08-19 041645.png)
+![image-20230819193340169](../img/image-20230819193340169.png)

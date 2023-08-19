@@ -12,10 +12,10 @@ tags: 踩坑日志
 
 使用H2OUVE对当前运行的bios进行提取
 
-![image-20230819192523604](../img/image-20230819192523604.png)
+![](../img/image-20230819192523604.png)
 
 ## 查找密码
 
 点击Variable 找到SystemSupervisorPW 查看明文密码（对 bios里保存的是明文密码
 
-![image-20230819193340169](../img/image-20230819193340169.png)
+![](../img/image-20230819193340169.png)

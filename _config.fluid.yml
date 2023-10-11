@@ -1007,6 +1007,12 @@ links:
       link: "https://halfsweet.cn/",
       avatar: "https://halfsweet.cn/img/Headshot.jpg"
     }
+    - {
+      title: "伊织的卧室",
+      intro: "本当はみんなと同じがよくて（本该是和大家一样的人）",
+      link: "https://www.iorikosakura.com.cn",
+      avatar: ""
+    }
 
 
   # 当成员头像加载失败时，替换为指定图片

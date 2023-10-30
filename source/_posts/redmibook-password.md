@@ -1,10 +1,10 @@
 ---
-title: 红米Redmibook 17 Bios密码找回
+title: 红米Redmibook 16 Bios密码找回
 date: 2023-08-19 19:01:34
 tags: 踩坑日志
 ---
 
-# 红米Redmibook 17 Bios密码找回
+# 红米Redmibook 16 Bios密码找回
 
 只能说这是一个困扰了我很久的问题，之前给bios随手设置了一个密码但是想不起来密码是什么了。所以才有了这篇踩坑日志。
 

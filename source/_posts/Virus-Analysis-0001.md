@@ -79,4 +79,10 @@ C:\Users\Default\Desktop\(P0)LNKNEW\(P1)588388456db280daIJE.exe x C:\Users\Defau
 
 > 样本留存 #7004665f20293bc4d74b39ddc922c6668d9df803.zip
 
+![image-20231101030216781](./../img/image-20231101030216781.png)
+
+
+
+![image-20231101030517618](./../img/image-20231101030517618.png)
+
 ![image-20231101013457720](./../img/image-20231101013457720.png)

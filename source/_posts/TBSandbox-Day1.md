@@ -64,10 +64,10 @@ fn main() {
 
 ```
 
-![image-20240404214236898](../img/TBSandbox-Day1/image-20240404214236898.png)
+![](../img/TBSandbox-Day1/image-20240404214236898.png)
 
 不得不承认,微步还是挺灵的.这回又给你塞了点安全狗 
 
-![image-20240404214250316](../img/TBSandbox-Day1/image-20240404214250316.png)
+![](../img/TBSandbox-Day1/image-20240404214250316.png)
 
 所以绕过微步的灵车技巧可能就是通过判断哈希是否相同来搞了

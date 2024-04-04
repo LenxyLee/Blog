@@ -8,7 +8,7 @@ tags: 沙箱分析
 
 > 算是一篇简单的水文,主要是吐槽以前有人提出的 微步沙箱里面有CrowdStrike.  也不知道从哪看来的文章就开始信口开河.
 
-![](C:\Users\RhineLab\Documents\GitHub\Blog\source\img\TBSandbox-Day1\image-20240404211234446.png)
+![](../img/TBSandbox-Day1/image-20240404214152937.png)
 
 纪念某泄露版CS
 
@@ -16,7 +16,7 @@ tags: 沙箱分析
 
 在查看进程中,总是能发现微步把奇奇怪怪的.exe塞到 `C:\Program Files\`和`C:\Program Files (x86)\`中
 
-![](C:\Users\RhineLab\Documents\GitHub\Blog\source\img\TBSandbox-Day1\image-20240404211604697.png)
+![](../img/TBSandbox-Day1/image-20240404214212657.png)
 
 以上进程甚至有Viper和微点(微点都死多少年了还能被拉出来鞭尸)
 
@@ -64,10 +64,10 @@ fn main() {
 
 ```
 
-![](C:\Users\RhineLab\Documents\GitHub\Blog\source\img\TBSandbox-Day1\image-20240404212120394.png)
+![image-20240404214236898](../img/TBSandbox-Day1/image-20240404214236898.png)
 
 不得不承认,微步还是挺灵的.这回又给你塞了点安全狗 
 
-![](C:\Users\RhineLab\Documents\GitHub\Blog\source\img\TBSandbox-Day1\image-20240404212854435.png)
+![image-20240404214250316](../img/TBSandbox-Day1/image-20240404214250316.png)
 
 所以绕过微步的灵车技巧可能就是通过判断哈希是否相同来搞了

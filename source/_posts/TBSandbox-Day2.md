@@ -317,6 +317,169 @@ VS版本切换到了2015 看起来还在Debug程序的上传功能?
 
 如果存在则弹窗提示American Megatrends Inc.如果没有则打开计算器.
 
+## SandboxChecker V1.5.0   4月7日追踪更新版
+
+![](../img/TBSandbox-Day2/image-20240407131236283.png)
+
+凌晨两点,这小哥真的不睡觉的吗 功能变化不大,似乎与V1.2.0版本差不多,除了新增一个打开计算器
+
+![](../img/TBSandbox-Day2/image-20240407131407965.png)
+
+信息发送至`117.50.179.15:8086`
+
+```
+systemInfo=Computer Name: DESKTOP-H9URB7T, CPU Cores: 4, Hard Drives: 2
+Directory Contents: 
+desktop.ini
+Microsoft Edge.lnk
+
+WinSAT: 
+2021-01-26 03.06.25.993.winsat.etl
+2021-01-26 03.06.26.712 Cpu.Assessment (Initial).WinSAT.xml
+2021-01-26 03.06.26.712 Disk.Assessment (Initial).WinSAT.xml
+2021-01-26 03.06.26.712 DWM.Assessment (Initial).WinSAT.xml
+2021-01-26 03.06.26.712 Graphics3D.Assessment (Initial).WinSAT.xml
+2021-01-26 03.06.26.712 Mem.Assessment (Initial).WinSAT.xml
+2021-01-26 03.08.10.544 Formal.Assessment (Initial).WinSAT.xml
+
+网卡信息:
+Realtek RTL8139C+ Fast Ethernet NIC
+
+开启窗口数量:
+6
+Process Name: [System Process], PID: 0
+Process Name: System, PID: 4
+Process Name: Registry, PID: 96
+Process Name: smss.exe, PID: 324
+Process Name: csrss.exe, PID: 444
+Process Name: wininit.exe, PID: 520
+Process Name: csrss.exe, PID: 568
+Process Name: winlogon.exe, PID: 620
+Process Name: services.exe, PID: 660
+Process Name: lsass.exe, PID: 684
+Process Name: svchost.exe, PID: 796
+Process Name: svchost.exe, PID: 820
+Process Name: fontdrvhost.exe, PID: 840
+Process Name: fontdrvhost.exe, PID: 848
+Process Name: svchost.exe, PID: 940
+Process Name: svchost.exe, PID: 992
+Process Name: dwm.exe, PID: 348
+Process Name: svchost.exe, PID: 360
+Process Name: svchost.exe, PID: 696
+Process Name: svchost.exe, PID: 1060
+Process Name: svchost.exe, PID: 1072
+Process Name: svchost.exe, PID: 1108
+Process Name: svchost.exe, PID: 1184
+Process Name: svchost.exe, PID: 1232
+Process Name: svchost.exe, PID: 1272
+Process Name: svchost.exe, PID: 1280
+Process Name: svchost.exe, PID: 1312
+Process Name: svchost.exe, PID: 1320
+Process Name: svchost.exe, PID: 1412
+Process Name: svchost.exe, PID: 1440
+Process Name: svchost.exe, PID: 1464
+Process Name: svchost.exe, PID: 1500
+Process Name: svchost.exe, PID: 1536
+Process Name: svchost.exe, PID: 1564
+Process Name: svchost.exe, PID: 1656
+Process Name: svchost.exe, PID: 1756
+Process Name: svchost.exe, PID: 1824
+Process Name: svchost.exe, PID: 1840
+Process Name: audiodg.exe, PID: 1980
+Process Name: svchost.exe, PID: 1992
+Process Name: svchost.exe, PID: 2044
+Process Name: svchost.exe, PID: 1192
+Process Name: svchost.exe, PID: 1432
+Process Name: spoolsv.exe, PID: 2148
+Process Name: svchost.exe, PID: 2244
+Process Name: svchost.exe, PID: 2276
+Process Name: svchost.exe, PID: 2476
+Process Name: svchost.exe, PID: 2484
+Process Name: svchost.exe, PID: 2492
+Process Name: AcrylicService.exe, PID: 2500
+Process Name: svchost.exe, PID: 2536
+Process Name: svchost.exe, PID: 2564
+Process Name: svchost.exe, PID: 2580
+Process Name: svchost.exe, PID: 2592
+Process Name: svchost.exe, PID: 2752
+Process Name: svchost.exe, PID: 3020
+Process Name: svchost.exe, PID: 2412
+Process Name: svchost.exe, PID: 352
+Process Name: svchost.exe, PID: 3084
+Process Name: sihost.exe, PID: 3324
+Process Name: svchost.exe, PID: 3352
+Process Name: svchost.exe, PID: 3488
+Process Name: ctfmon.exe, PID: 3520
+Process Name: taskhostw.exe, PID: 3576
+Process Name: explorer.exe, PID: 3792
+Process Name: sppsvc.exe, PID: 3916
+Process Name: svchost.exe, PID: 3984
+Process Name: svchost.exe, PID: 4060
+Process Name: ChsIME.exe, PID: 4080
+Process Name: SppExtComObj.Exe, PID: 3956
+Process Name: StartMenuExperienceHost.exe, PID: 4120
+Process Name: svchost.exe, PID: 4128
+Process Name: svchost.exe, PID: 4160
+Process Name: svchost.exe, PID: 4248
+Process Name: RuntimeBroker.exe, PID: 4368
+Process Name: ApplicationFrameHost.exe, PID: 4672
+Process Name: MicrosoftEdge.exe, PID: 4692
+Process Name: browser_broker.exe, PID: 4816
+Process Name: svchost.exe, PID: 4892
+Process Name: dllhost.exe, PID: 4972
+Process Name: Windows.WARP.JITService.exe, PID: 4984
+Process Name: RuntimeBroker.exe, PID: 5088
+Process Name: MicrosoftEdgeSH.exe, PID: 4428
+Process Name: MicrosoftEdgeCP.exe, PID: 4460
+Process Name: WindowsInternal.ComposableShell.Experiences.TextInput.InputApp.exe, PID: 5264
+Process Name: WeChat.exe, PID: 5536
+Process Name: taskhostw.exe, PID: 5960
+Process Name: svchost.exe, PID: 6120
+Process Name: svchost.exe, PID: 4916
+Process Name: TrustedInstaller.exe, PID: 5644
+Process Name: TiWorker.exe, PID: 5500
+Process Name: svchost.exe, PID: 2600
+Process Name: WmiPrvSE.exe, PID: 4744
+Process Name: WmiPrvSE.exe, PID: 6076
+Process Name: WeChat.exe, PID: 5992
+Process Name: svchost.exe, PID: 3940
+Process Name: svchost.exe, PID: 5592
+Process Name: MjUVfuNpXl.exe, PID: 1348
+Process Name: unsecapp.exe, PID: 2896
+Process Name: Detonate.exe, PID: 1372
+Process Name: svchost.exe, PID: 1260
+Process Name: GoogleUpdateSetup.exe, PID: 5244
+Process Name: clamd.exe, PID: 1612
+Process Name: svchost.exe, PID: 1684
+Process Name: taskhostw.exe, PID: 2552
+Process Name: RemindersServer.exe, PID: 2432
+Process Name: backgroundTaskHost.exe, PID: 1936
+Process Name: UniversalAVService.exe, PID: 4196
+Process Name: audiodg.exe, PID: 1424
+Process Name: EverythingServer.exe, PID: 4336
+Process Name: WUDFHost.exe, PID: 4840
+Process Name: GoogleUpdate.exe, PID: 5892
+Process Name: WeChat.exe, PID: 3236
+Process Name: sihost.exe, PID: 5200
+Process Name: WmiPrvSE.exe, PID: 5192
+Process Name: QQ.exe, PID: 2720
+Process Name: ShellExperienceHost.exe, PID: 3244
+Process Name: BackgroundTransferHost.exe, PID: 5520
+Process Name: svchost.exe, PID: 5104
+Process Name: ShellExperienceHost.exe, PID: 2548
+Process Name: RuntimeBroker.exe, PID: 4240
+Process Name: svchost.exe, PID: 5928
+Process Name: SandboxCheck.exe, PID: 448
+Process Name: conhost.exe, PID: 2272
+Process Name: svchost.exe, PID: 4348
+Process Name: calc.exe, PID: 464
+
+```
+
+
+
+
+
 ## END
 
 就此似乎结束了 他没有更新新的东西

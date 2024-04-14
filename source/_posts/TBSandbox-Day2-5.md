@@ -8,6 +8,8 @@ tags: 沙箱分析
 
 > 这是Day2.5 用来总结一些奇淫艺技用的
 
+## QQ内存大小判断法
+
 之前有人说可以使用检查QQ内存大小来判断是否为微步沙箱
 
 于是我们来测试下看看 糊了一个程序
@@ -32,6 +34,49 @@ fn main() {
 ![](../img/TBSandbox-Day2-5/image-20240405222531691.png)
 
 结果是可行的，QQ只存在单进程且仅有2MB.且通过这个方法似乎可以使微步执行超时？
+
+喂了避免使用CreateToolhelp32Snapshot造成沙箱生成遍历进程的指标.在这里用到了sysinfo
+
+## 子进程判断法
+
+![](../img/TBSandbox-Day2-5/image-20240407144934392.png)
+
+微步会把奇奇怪怪的进程都塞给Explorer.exe 所以可以通过这个方法简易的判断一下
+
+
+
+## CPU判断
+
+```rust
+use std::process::Command;
+use raw_cpuid::CpuId;
+
+fn main() {
+    // 创建 CPUID 对象
+    let cpuid = CpuId::new();
+
+    // 查询 CPU 型号和制造商信息
+    if let Some(brand_string) = cpuid.get_processor_brand_string()
+    {
+        println!("CPU 型号: {}", brand_string.as_str());
+    } else {
+        println!("无法获取 CPU 型号信息");
+    }
+    if let Some(feature_info) = cpuid.get_feature_info() {
+        if feature_info.has_vmx() || feature_info.has_avx() {
+            println!("CPU 支持虚拟化");
+        } else {
+            println!("CPU 不支持虚拟化");
+        }
+    } else {
+        println!("无法获取 CPU 特性信息");
+    }
+    let _ = Command::new("cmd.exe").arg("/c").arg("pause").status();
+}
+
+```
+
+
 
 ## 来看看样本吧  未完待续（ 打群星去了
 

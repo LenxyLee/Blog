@@ -24,7 +24,7 @@ CCR2004由于其4核心的处理器与1.5G的主频，使得即使是直通模�
 
 硬件部分也是我最想吐槽的东西了，PS225的console口是3.5mm的耳机接口
 
-他们提供了建议配件FTDI的3.3v TTL 转接线，但是由于手里暂时没有所以只能放弃连接了。（日后填坑吧）
+他们提供了建议配件 FTDI的3.3v TTL 转接线，但是由于手里暂时没有所以只能放弃连接了。（日后填坑吧）
 
 ![](../img/Screen-xfnm4RLW.png)
 
@@ -40,4 +40,6 @@ CCR2004由于其4核心的处理器与1.5G的主频，使得即使是直通模�
 
 在lspci中可以看到Broadcom小太阳已经成功的识别到了，并且是50G的Ethernet Soc。
 
-但是在这里有一点是让我存疑的。如下图所示主机侧的PF8与PF0通过NIC相连且与PF0与PF8均与Port0相连。这样子是不是可以将NIC理解为一个类似Nvidia里面bf2的eswitch？![Screen-M5ZOoIoe](../img/Screen-M5ZOoIoe.png)
+但是在这里有一点是让我存疑的。如下图所示主机侧的PF8与PF0通过NIC相连且与PF0与PF8均与Port0相连。这样子是不是可以将NIC理解为一个类似Nvidia里面bf2的eswitch？![](../img/Screen-M5ZOoIoe.png)
+
+其命名规则倒是简单的，x86 主机上所有偶数编号的接口（例如 enp1s0f0、enp1s0f2、enp1s0f4 和 enp1s0f6）都会连接到Port 0。同样，ARM 设备上偶数编号的接口（如 enP8p1s0f0np0、enP8p1s0f2np0、enP8p1s0f4np0 和 enP8p1s0f6np0）也连接到Port 0。而 x86 主机和 ARM 设备上所有奇数编号的接口则被连接到Port 1。

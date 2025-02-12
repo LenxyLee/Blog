@@ -1,5 +1,5 @@
 ---
-title: ps225 day one
+title: PS225的踩坑日志
 date: 2025-02-12 23:42:06
 tags: 踩坑日志
 ---
@@ -12,11 +12,13 @@ tags: 踩坑日志
 
 ps225是一个经典的dpu，8核心arm72搭配自家的NIC组成
 
-![Screen-uX0D2mEt](../img/Screen-uX0D2mEt.png)
+![](../img/Screen-uX0D2mEt.png)
 
-看到这张图的时候我在想，这个产品会与Mikrotik的CCR2004-1G-2XS-PCIe差距有多大。因为Mikrotik的结构与其类似，都是SOC连接网口。以至于我一直怀疑这个产品的性能到底会怎么样。CCR2004由于其4核心的处理器与1.5G的主频，使得即使是直通模式也无法跑满50G。如果转为使用桥接模式则性能会有更加严重的衰减。
+看到这张图的时候我在想，这个产品会与Mikrotik的CCR2004-1G-2XS-PCIe差距有多大。因为Mikrotik的结构与其类似，都是SOC连接网口。以至于我一直怀疑这个产品的性能到底会怎么样。
 
-![Screen-E38EfIW7](../img/Screen-E38EfIW7.png)
+CCR2004由于其4核心的处理器与1.5G的主频，使得即使是直通模式也无法跑满50G。如果转为使用桥接模式则性能会有更加严重的衰减。
+
+![](../img/Screen-E38EfIW7.png)
 
 ## 硬件部分
 
@@ -24,7 +26,7 @@ ps225是一个经典的dpu，8核心arm72搭配自家的NIC组成
 
 他们提供了建议配件FTDI的3.3v TTL 转接线，但是由于手里暂时没有所以只能放弃连接了。（日后填坑吧）
 
-![Screen-xfnm4RLW](../img/Screen-xfnm4RLW.png)
+![](../img/Screen-xfnm4RLW.png)
 
 ![Screen-BpmcwDwB](../img/Screen-BpmcwDwB.png)
 
@@ -32,4 +34,4 @@ ps225是一个经典的dpu，8核心arm72搭配自家的NIC组成
 
 ## 上机测试
 
-由于用惯了epyc，导致我忘记x99平台的pcie通道是残缺的。所以就有了这样子的地狱构图。![Screen-tO9v944G](../img/Screen-tO9v944G.png)
+由于用惯了epyc，导致我忘记x99平台的pcie通道是残缺的。所以就有了这样子的地狱构图。![](../img/Screen-tO9v944G.png)

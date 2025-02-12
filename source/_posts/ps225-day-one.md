@@ -10,7 +10,7 @@ tags: 踩坑日志
 
 ## PS225的架构
 
-ps225是一个经典的dpu，8核心arm72搭配自家的NIC组成
+ps225是一个经典的dpu，8核心arm72搭配自家的以太网控制器Nitro组成
 
 ![](../img/Screen-uX0D2mEt.png)
 
@@ -28,10 +28,16 @@ CCR2004由于其4核心的处理器与1.5G的主频，使得即使是直通模�
 
 ![](../img/Screen-xfnm4RLW.png)
 
-![Screen-BpmcwDwB](../img/Screen-BpmcwDwB.png)
+![](../img/Screen-BpmcwDwB.png)
 
 卡片整体外观如下，中间那颗大大的就是BCM58802H。其散热器的硅脂上疑似有一层金属膜（不知道是出场忘记撕了还是导热用的。风扇插上去十分的吵，建议自行更换。
 
 ## 上机测试
 
 由于用惯了epyc，导致我忘记x99平台的pcie通道是残缺的。所以就有了这样子的地狱构图。![](../img/Screen-tO9v944G.png)
+
+![](../img/IMG_8779.png)
+
+在lspci中可以看到Broadcom小太阳已经成功的识别到了，并且是50G的Ethernet Soc。
+
+但是在这里有一点是让我存疑的。如下图所示主机侧的PF8与PF0通过NIC相连且与PF0与PF8均与Port0相连。这样子是不是可以将NIC理解为一个类似Nvidia里面bf2的eswitch？![Screen-M5ZOoIoe](../img/Screen-M5ZOoIoe.png)

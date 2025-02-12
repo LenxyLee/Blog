@@ -1,0 +1,35 @@
+---
+title: ps225 day one
+date: 2025-02-12 23:42:06
+tags: 踩坑日志
+---
+
+# PS225的踩坑日志
+
+> 最近从群友白嫖到了两张ps225 索性有了本篇文章。
+
+## PS225的架构
+
+ps225是一个经典的dpu，8核心arm72搭配自家的NIC组成
+
+![Screen-uX0D2mEt](../img/Screen-uX0D2mEt.png)
+
+看到这张图的时候我在想，这个产品会与Mikrotik的CCR2004-1G-2XS-PCIe差距有多大。因为Mikrotik的结构与其类似，都是SOC连接网口。以至于我一直怀疑这个产品的性能到底会怎么样。CCR2004由于其4核心的处理器与1.5G的主频，使得即使是直通模式也无法跑满50G。如果转为使用桥接模式则性能会有更加严重的衰减。
+
+![Screen-E38EfIW7](../img/Screen-E38EfIW7.png)
+
+## 硬件部分
+
+硬件部分也是我最想吐槽的东西了，PS225的console口是3.5mm的耳机接口
+
+他们提供了建议配件FTDI的3.3v TTL 转接线，但是由于手里暂时没有所以只能放弃连接了。（日后填坑吧）
+
+![Screen-xfnm4RLW](../img/Screen-xfnm4RLW.png)
+
+![Screen-BpmcwDwB](../img/Screen-BpmcwDwB.png)
+
+卡片整体外观如下，中间那颗大大的就是BCM58802H。其散热器的硅脂上疑似有一层金属膜（不知道是出场忘记撕了还是导热用的。风扇插上去十分的吵，建议自行更换。
+
+## 上机测试
+
+由于用惯了epyc，导致我忘记x99平台的pcie通道是残缺的。所以就有了这样子的地狱构图。![Screen-tO9v944G](../img/Screen-tO9v944G.png)

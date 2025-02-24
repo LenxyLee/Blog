@@ -93,6 +93,6 @@ git config --global commit.gpgsign true
 
 ## 大功告成
 
-随后对commit即可对新的提交进行签名 同时在提交历史也可以看到本次是验证过的）
+后续就是上传去github看看是否成功
 
 ![](../img/image-20230819231625612.png)

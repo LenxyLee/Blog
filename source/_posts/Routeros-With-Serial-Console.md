@@ -8,11 +8,11 @@ tags: 随笔
 
 在近日折腾C3558卵路由的时候，安装Routeros总是出现问题。载入硬盘后就变得没有输出。索性手动折腾一下。
 
-![GlobalCare-Zi0j930q](../img/GlobalCare-Zi0j930q.png)
+![](../img/GlobalCare-Zi0j930q.png)
 
 解压后获取安装img，双击挂载。
 
-![GlobalCare-ZW67IhGq](../img/GlobalCare-ZW67IhGq.png)
+![](../img/GlobalCare-ZW67IhGq.png)
 
 修改syslinux.cfg
 

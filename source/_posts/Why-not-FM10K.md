@@ -4,7 +4,7 @@ date: 2025-08-07 02:36:54
 tags: 灵车日志
 ---
 
-# 前言
+## 前言
 
 如果说闲言少叙那我总想多说点什么，第一次遇到FM10K是在cyberbus上面。有人搞了一块Intel FM10840的网卡 **Silicom PE3100G2DQIRM**！
 
@@ -38,4 +38,13 @@ Intel对FM10K这个控制器的定义以太网与交换机的混合体。实际�
 - 16K MAC and NextHop tables 
 - NSH Service Function Classifier and Forwarder
 
-这或许就是一个交换机芯片。有TCAM 16K的MAC表 32K的TCAM条目
+这或许就是一个交换机芯片。有TCAM 16K的MAC表 32K的TCAM条目（感觉比某些螃蟹交换机配置都好）
+
+## 食用指南
+
+由于使用的是 Silicom 的方案，可使用其 RDIF控制工具(Silicom Linux RDI Control Utility)。该工具实现了大部分管理功能，可作为后台常驻的 daemon 运行。它通过 CLI方式向管理平面暴露 API，对下通常通过内核驱动（UIO）与数据平面交互。
+
+注：不开启Rdif时，网口无法正常的启用。
+
+
+

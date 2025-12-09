@@ -50,7 +50,7 @@ tags: 踩坑日志
 
 ```shell
 #基础版固件
-wget https://download.corigine.com.cn/public/packages/agilio-nic-firmware-24.07-6.noarch.rpm
+wget https://download.corigine.com.cn/public/packages/agilio-nic-firmware-24.07-6.noarch.rpm  #更新 本站点已经无法访问了。
 rpm -ivh agilio-nic-firmware-24.07-6.noarch.rpm  
 rmmod nfp; modprobe nfp
 
@@ -76,6 +76,77 @@ nfp 0000:01:00.0: Finished loading FW image
 但是又有说明 23.01版本可以分配到不同端口，但是没有提及配置方法所以只能留坑。
 
 剩下的内容需要咕咕一下了。本来准备用t-rex来进行流量测试，奈何手中没有靠谱的25g网卡或者100g拆分4*25的dac线。所以没法实现后续的东西只能等材料全了再搞了。
+
+
+
+## 填坑计划-BSP升级
+
+> NFP 有一个内部的命令推/拉（CPP）总线，允许对网卡内部器件进行调试访问。CPP 访问允许用户空间工具对芯片内部的原始访问，并且是大多数 BSP 工具使用所必需的。只有 OOT 驱动程序允许 CPP 访问。
+
+先从官网获取 `agilio-nfp-driver-dkms-24.07-7.noarch.rpm`
+
+```shell
+# cd /usr/src/agilio-nfp-driver-24.07-7
+# make install
+# modinfo nfp
+filename:       /lib/modules/5.14.0-570.12.1.el9_6.x86_64/updates/nfp.ko
+nfp_build_path: /usr/src/agilio-nfp-driver-24.07-7/src
+nfp_build_host: RD450X
+nfp_build_user: root
+nfp_build_user_id:  root
+nfp_src_path:   /usr/src/agilio-nfp-driver-24.07-7/src/
+nfp_src_version:rev-24.07-7 (o-o-t)
+version:        6.12.0
+description:    The Network Flow Processor (NFP) driver.
+license:        GPL
+author:         Corigine, Inc. <oss-drivers@corigine.com>
+firmware:       netronome/AMDA2002-1114.nffw
+firmware:       netronome/AMDA2002-1113.nffw
+firmware:       netronome/AMDA2001-1104.nffw
+firmware:       netronome/AMDA2001-1103.nffw
+firmware:       netronome/AMDA2000-1104.nffw
+firmware:       netronome/AMDA2000-1103.nffw
+firmware:       netronome/AMDA0161-1001.nffw
+firmware:       netronome/nic_AMDA0099-0001_1x10_1x25.nffw
+firmware:       netronome/nic_AMDA0099-0001_2x25.nffw
+firmware:       netronome/nic_AMDA0099-0001_2x10.nffw
+firmware:       netronome/nic_AMDA0097-0001_8x10.nffw
+firmware:       netronome/nic_AMDA0097-0001_4x10_1x40.nffw
+firmware:       netronome/nic_AMDA0097-0001_2x40.nffw
+firmware:       netronome/nic_AMDA0096-0001_2x10.nffw
+firmware:       netronome/nic_AMDA0081-0001_4x10.nffw
+firmware:       netronome/nic_AMDA0081-0001_1x40.nffw
+firmware:       netronome/nic_AMDA0058-0012_2x40.nffw
+firmware:       netronome/nic_AMDA0058-0011_2x40.nffw
+rhelversion:    9.6
+
+# modprobe nfp nfp_dev_cpp=1      #在 nfp 模块构建完成后，加载具有 CPP 访问权限的驱动
+# nfp-fw-update -c #检查版本
+NFP DEVICE ID:0 SMCAMDA0099-000117341047 r11
+Configurator is AMDA-0099-0001  20170209101825 and should be AMDA-0099-0001  20200824142802
+Updates are required.
+Reboot required for updates to take effect.
+# nfp-fw-update -u #升级 
+# nfp-fw-update  #完成升级
+NFP DEVICE ID:0 SMCAMDA0099-000117341047 r11
+                 bsp.version.running:   24.07-9
+                 bsp.version.flashed:   24.07-9
+                cpld.version.running:   0x3030000
+           bspbundle.version.flashed:   bspbundle_062025094747_ebea8774
+        configurator.version.running:   AMDA-0099-0001  20200824142802
+        configurator.version.flashed:   AMDA-0099-0001  20200824142802
+
+```
+
+
+
+
+
+
+
+
+
+
 
 ## VPP的尝试
 

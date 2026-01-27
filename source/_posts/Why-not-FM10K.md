@@ -28,30 +28,7 @@ tags: 灵车日志
 
 画了一个十分简陋的Block Diagram，但是至少比Mikrotik的要墙因为我是彩色的x
 
-```mermaid
-graph TD
-
-    MB["CPU"]
-    PLX["03:00.0 
-    PLX Technology, Inc. PEX 8747"]
-    NIC1["05:00.0 
-    Intel Corporation Ethernet Switch FM10000 Host Interface"]
-    NIC2["06:00.0 
-    Intel Corporation Ethernet Switch FM10000 Host Interface"]
-
-
-    classDef main fill:#e1f5fe,stroke:#01579b,stroke-width:2px;
-    classDef switch fill:#fff9c4,stroke:#fbc02d,stroke-width:2px;
-    classDef nic fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px;
-
-    class MB main
-    class PLX switch
-    class NIC1,NIC2 nic
-
-    MB -- "PCIe 3.0 x16 " --> PLX
-    PLX -- "Width x8 (ok)" --> NIC1
-    PLX -. "Width x4 (downgraded)" .-> NIC2
-```
+![](../img/Why-not-FM10K/image-20260128011214568.png)
 
 
 

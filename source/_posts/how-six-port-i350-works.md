@@ -4,8 +4,9 @@ date: 2025-02-24 23:53:39
 tags: 灵车日记
 ---
 
+# 神奇的I350-T6
+
 > 有请我们今天的重要嘉宾 Intel I350 Ethernet Controller 
->
 
 ![](../img/Screen-8Bg35fhl.png)
 

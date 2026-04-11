@@ -2,7 +2,10 @@
 title: Bluefield-2 折腾日记
 date: 2025-12-08 18:55:35
 tags: 
+
 ---
+
+# Bluefield-2 折腾日记
 
 > 我好想买一个BF3啊啊啊啊啊啊啊
 >

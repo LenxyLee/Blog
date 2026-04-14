@@ -91,7 +91,7 @@ nfp 0000:01:00.0: Finished loading FW image
 
 ```shell
 # cd /usr/src/agilio-nfp-driver-24.07-7
-# make install
+# make install       #make失败的看下文
 # modinfo nfp
 filename:       /lib/modules/5.14.0-570.12.1.el9_6.x86_64/updates/nfp.ko
 nfp_build_path: /usr/src/agilio-nfp-driver-24.07-7/src
@@ -146,7 +146,38 @@ NFP DEVICE ID:0 SMCAMDA0099-000117341047 r11
 
 
 
+## 驱动文件修补
 
+在我近日折腾这张网卡的时候，发现编译出现了问题。（RHEL!)
+
+```bash
+/usr/src/agilio-nfp-driver-24.07-7/src/crdma/crdma_counters.c:301:28: error: initialization of ‘int (*)(struct rdma_counter *, struct ib_qp *, u32)’ {aka ‘int (*)(struct rdma_counter *, struct ib_qp *, unsigned int)’} from incompatible pointer type ‘int (*)(struct rdma_counter *, struct ib_qp *)’ [-Werror=incompatible-pointer-types]
+  301 |         .counter_bind_qp = crdma_ib_counter_bind_qp,
+      |                            ^~~~~~~~~~~~~~~~~~~~~~~~
+/usr/src/agilio-nfp-driver-24.07-7/src/crdma/crdma_counters.c:301:28: note: (near initialization for ‘crdma_hw_stats_ops.counter_bind_qp’)
+/usr/src/agilio-nfp-driver-24.07-7/src/crdma/crdma_counters.c:302:30: error: initialization of ‘int (*)(struct ib_qp *, u32)’ {aka ‘int (*)(struct ib_qp *, unsigned int)’} from incompatible pointer type ‘int (*)(struct ib_qp *)’ [-Werror=incompatible-pointer-types]
+  302 |         .counter_unbind_qp = crdma_ib_counter_unbind_qp,
+      |                              ^~~~~~~~~~~~~~~~~~~~~~~~~~
+/usr/src/agilio-nfp-driver-24.07-7/src/crdma/crdma_counters.c:302:30: note: (near initialization for ‘crdma_hw_stats_ops.counter_unbind_qp’)
+cc1: some warnings being treated as errors
+make[2]: *** [scripts/Makefile.build:249: /usr/src/agilio-nfp-driver-24.07-7/src/crdma/crdma_counters.o] Error 1
+make[1]: *** [Makefile:1953: /usr/src/agilio-nfp-driver-24.07-7/src] Error 2
+make[1]: Leaving directory '/usr/src/kernels/5.14.0-611.47.1.el9_7.x86_64‘
+```
+多多少少笑不出来了，这个版本的Kernel把6.11的 RDMA core 变更移植过来了。以至于不得不新增一个 u32 port
+
+```c
+static int crdma_ib_counter_bind_qp(struct rdma_counter *counter,
+                                   struct ib_qp *qp,u32 port)    <-----------新增了u32 port 
+{
+       
+}
+
+static int crdma_ib_counter_unbind_qp(struct ib_qp *qp,u32 port)  <-----------新增了u32 port 
+{
+        
+}
+```
 
 
 
@@ -205,4 +236,144 @@ Other network devices
 ```
 
 
+
+## 信息留存
+
+Dmesg
+
+```dmesg
+[  143.076715] nfp: NFP PCIe Driver, Copyright (C) 2014-2020 Netronome Systems
+[  143.076728] nfp: NFP PCIe Driver, Copyright (C) 2021-2022 Corigine Inc.
+[  143.076740] nfp src version: rev-24.07-7 (o-o-t)
+               nfp src path: /usr/src/agilio-nfp-driver-24.07-7/src/
+               nfp build user id: root
+               nfp build user: root
+               nfp build host: localhost.localdomain
+               nfp build path: /usr/src/agilio-nfp-driver-24.07-7/src
+[  143.077131] nfp-net-vnic: NFP vNIC driver, Copyright (C) 2010-2020 Netronome Systems
+[  143.077166] nfp-net-vnic: NFP vNIC driver, Copyright (C) 2021-2022 Corigine Inc.
+[  143.078891] nfp 0000:01:00.0: Single-PF detected
+[  143.078906] nfp 0000:01:00.0: Network Flow Processor NFP4000/NFP5000/NFP6000 PCIe Card Probe
+[  143.079017] nfp 0000:01:00.0: 63.008 Gb/s available PCIe bandwidth (8.0 GT/s PCIe x8 link)
+[  143.079476] nfp 0000:01:00.0: RESERVED BARs: 0.0: General/MSI-X SRAM, 0.1: PCIe XPB/MSI-X PBA, 0.4: Explicit0, 0.5: Explicit1, free: 20/24
+[  143.079717] nfp 0000:01:00.0: Model: 0x62000010, SN: 00:15:4d:02:1e:aa , Ifc: 0x10ff
+[  143.083629] nfp 0000:01:00.0: Assembly: SMCAMDA0099-000117341047-11 CPLD: 0x3030000
+[  143.218026] nfp 0000:01:00.0: BSP: 24.07-9
+[  143.298997] nfp 0000:01:00.0: nfp: Looking for firmware file in order of priority:
+[  143.301935] nfp 0000:01:00.0: nfp:   netronome/serial-00-15-4d-13-88-4e-10-ff.nffw: not found
+[  143.302136] nfp 0000:01:00.0: nfp:   netronome/pci-0000:01:00.0.nffw: not found
+[  143.302343] nfp 0000:01:00.0: nfp:   netronome/AMDA0099-0001.nffw: not found
+[  143.320101] nfp 0000:01:00.0: nfp:   netronome/nic_AMDA0099-0001_2x25.nffw: found
+[  143.320125] nfp 0000:01:00.0: Soft-resetting the NFP
+[  157.504132] nfp 0000:01:00.0: nfp_nsp: Firmware from driver loaded, no FW selection policy HWInfo key found
+[  157.504146] nfp 0000:01:00.0: Finished loading FW image
+[  157.666712] nfp 0000:01:00.0 eth0: NFP-6xxx Netdev: TxQs=32/32 RxQs=8/32
+[  157.666744] nfp 0000:01:00.0 eth0: VER: 0.0.4.5, Maximum supported MTU: 9532
+[  157.666758] nfp 0000:01:00.0 eth0: CAP: 0xe3c6a633 PROMISC RXCSUM TXCSUM RXQINQ RXVLANv2 TXVLANv2 GATHER TSO1 RSS1 RSS2 IRQMOD VEPA VXLAN NVGRE RXCSUM_COMPLETE LIVE_ADDR MULTICAST_FILTER 
+[  159.800267] nfp 0000:01:00.0 eth0: NFP-6xxx Netdev: TxQs=32/32 RxQs=8/32
+[  159.800289] nfp 0000:01:00.0 eth0: VER: 0.0.4.5, Maximum supported MTU: 9532
+[  159.800308] nfp 0000:01:00.0 eth0: CAP: 0xe3c6a633 PROMISC RXCSUM TXCSUM RXQINQ RXVLANv2 TXVLANv2 GATHER TSO1 RSS1 RSS2 IRQMOD VEPA VXLAN NVGRE RXCSUM_COMPLETE LIVE_ADDR MULTICAST_FILTER 
+[  159.810739] nfp 0000:01:00.0 enp1s0np1: renamed from eth0
+```
+
+lspci 
+
+```lspci
+08:00.0 Ethernet controller: Corigine, Inc. Device 4000
+        Subsystem: Corigine, Inc. Device 0099
+        Physical Slot: 5
+        Control: I/O+ Mem+ BusMaster+ SpecCycle- MemWINV- VGASnoop- ParErr+ Stepping- SERR+ FastB2B- DisINTx+
+        Status: Cap+ 66MHz- UDF- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort- >SERR- <PERR- INTx-
+        Latency: 0, Cache Line Size: 32 bytes
+        Interrupt: pin A routed to IRQ 29
+        NUMA node: 0
+        IOMMU group: 118
+        Region 0: Memory at 383fd0000000 (64-bit, prefetchable) [size=128M]
+        Region 2: Memory at 383fd8000000 (64-bit, prefetchable) [size=64M]
+        Region 4: Memory at 383fdc000000 (64-bit, prefetchable) [size=16M]
+        Expansion ROM at c0000000 [disabled] [size=16M]
+        Capabilities: [80] Power Management version 3
+                Flags: PMEClk- DSI- D1+ D2- AuxCurrent=0mA PME(D0+,D1+,D2-,D3hot+,D3cold-)
+                Status: D0 NoSoftRst+ PME-Enable- DSel=0 DScale=0 PME-
+        Capabilities: [b0] MSI-X: Enable+ Count=256 Masked-
+                Vector table: BAR=0 offset=00000000
+                PBA: BAR=0 offset=01100190
+        Capabilities: [c0] Express (v2) Endpoint, IntMsgNum 0
+                DevCap: MaxPayload 512 bytes, PhantFunc 0, Latency L0s <1us, L1 <1us
+                        ExtTag- AttnBtn- AttnInd- PwrInd- RBE+ FLReset+ SlotPowerLimit 0W TEE-IO-
+                DevCtl: CorrErr+ NonFatalErr+ FatalErr+ UnsupReq+
+                        RlxdOrd- ExtTag- PhantFunc- AuxPwr- NoSnoop+ FLReset-
+                        MaxPayload 256 bytes, MaxReadReq 512 bytes
+                DevSta: CorrErr- NonFatalErr- FatalErr- UnsupReq- AuxPwr- TransPend-
+                LnkCap: Port #0, Speed 8GT/s, Width x8, ASPM L0s L1, Exit Latency L0s <1us, L1 <1us
+                        ClockPM- Surprise- LLActRep- BwNot- ASPMOptComp+
+                LnkCtl: ASPM Disabled; RCB 64 bytes, LnkDisable- CommClk+
+                        ExtSynch- ClockPM- AutWidDis- BWInt- AutBWInt-
+                LnkSta: Speed 8GT/s, Width x8
+                        TrErr- Train- SlotClk+ DLActive- BWMgmt- ABWMgmt-
+                DevCap2: Completion Timeout: Range B, TimeoutDis+ NROPrPrP- LTR-
+                         10BitTagComp- 10BitTagReq- OBFF Via message, ExtFmt- EETLPPrefix-
+                         EmergencyPowerReduction Not Supported, EmergencyPowerReductionInit-
+                         FRS- TPHComp+ ExtTPHComp-
+                         AtomicOpsCap: 32bit+ 64bit+ 128bitCAS+
+                DevCtl2: Completion Timeout: 50us to 50ms, TimeoutDis-
+                         AtomicOpsCtl: ReqEn+
+                         IDOReq- IDOCompl- LTR- EmergencyPowerReductionReq-
+                         10BitTagReq- OBFF Disabled, EETLPPrefixBlk-
+                LnkCap2: Supported Link Speeds: 2.5-8GT/s, Crosslink- Retimer- 2Retimers- DRS-
+                LnkCtl2: Target Link Speed: 8GT/s, EnterCompliance- SpeedDis-
+                         Transmit Margin: Normal Operating Range, EnterModifiedCompliance- ComplianceSOS-
+                         Compliance Preset/De-emphasis: -6dB de-emphasis, 0dB preshoot
+                LnkSta2: Current De-emphasis Level: -6dB, EqualizationComplete+ EqualizationPhase1+
+                         EqualizationPhase2+ EqualizationPhase3+ LinkEqualizationRequest-
+                         Retimer- 2Retimers- CrosslinkRes: unsupported
+        Capabilities: [100 v2] Advanced Error Reporting
+                UESta:  DLP- SDES- TLP- FCP- CmpltTO- CmpltAbrt- UnxCmplt- RxOF- MalfTLP-
+                        ECRC- UnsupReq- ACSViol- UncorrIntErr- BlockedTLP- AtomicOpBlocked- TLPBlockedErr-
+                        PoisonTLPBlocked- DMWrReqBlocked- IDECheck- MisIDETLP- PCRC_CHECK- TLPXlatBlocked-
+                UEMsk:  DLP- SDES- TLP- FCP- CmpltTO- CmpltAbrt- UnxCmplt- RxOF- MalfTLP-
+                        ECRC- UnsupReq- ACSViol- UncorrIntErr+ BlockedTLP- AtomicOpBlocked- TLPBlockedErr-
+                        PoisonTLPBlocked- DMWrReqBlocked- IDECheck- MisIDETLP- PCRC_CHECK- TLPXlatBlocked-
+                UESvrt: DLP+ SDES+ TLP- FCP+ CmpltTO- CmpltAbrt- UnxCmplt- RxOF+ MalfTLP+
+                        ECRC- UnsupReq- ACSViol- UncorrIntErr+ BlockedTLP- AtomicOpBlocked- TLPBlockedErr-
+                        PoisonTLPBlocked- DMWrReqBlocked- IDECheck- MisIDETLP- PCRC_CHECK- TLPXlatBlocked-
+                CESta:  RxErr- BadTLP- BadDLLP- Rollover- Timeout- AdvNonFatalErr- CorrIntErr- HeaderOF-
+                CEMsk:  RxErr- BadTLP- BadDLLP- Rollover- Timeout- AdvNonFatalErr+ CorrIntErr+ HeaderOF+
+                AERCap: First Error Pointer: 00, ECRCGenCap+ ECRCGenEn- ECRCChkCap+ ECRCChkEn-
+                        MultHdrRecCap- MultHdrRecEn- TLPPfxPres- HdrLogCap-
+                HeaderLog: 00000000 00000000 00000000 00000000
+        Capabilities: [140 v1] Alternative Routing-ID Interpretation (ARI)
+                ARICap: MFVC- ACS-, Next Function: 0
+                ARICtl: MFVC- ACS-, Function Group: 0
+        Capabilities: [150 v1] Device Serial Number 00:15:4d:02:1e:aa
+        Capabilities: [200 v1] Single Root I/O Virtualization (SR-IOV)
+                IOVCap: Migration- 10BitTagReq- IntMsgNum 0
+                IOVCtl: Enable- Migration- Interrupt- MSE- ARIHierarchy+ 10BitTagReq-
+                IOVSta: Migration-
+                Initial VFs: 64, Total VFs: 64, Number of VFs: 0, Function Dependency Link: 00
+                VF offset: 64, stride: 1, Device ID: 6003
+                Supported Page Size: 00000553, System Page Size: 00000001
+                Region 0: Memory at 00000000c5000000 (64-bit, non-prefetchable)
+                Region 2: Memory at 00000000c1000000 (64-bit, non-prefetchable)
+                VF Migration: offset: 00000000, BIR: 0
+        Capabilities: [300 v1] Secondary PCI Express
+                LnkCtl3: LnkEquIntrruptEn- PerformEqu-
+                LaneErrStat: 0
+        Kernel driver in use: vfio-pci #没错 被我直通的
+        Kernel modules: nfp
+```
+
+```ethtool
+ethtool -i enp1s0np0
+driver: nfp
+version: rev-24.07-7 (o-o-t)
+firmware-version: 0.0.4.5 0.39 nic-24.07.7 nic
+expansion-rom-version: 
+bus-info: 0000:01:00.0
+supports-statistics: yes
+supports-test: yes
+supports-eeprom-access: yes
+supports-register-dump: yes
+supports-priv-flags: yes
+```
 

@@ -1,7 +1,7 @@
 ---
 title: Bluefield-2 折腾日记
 date: 2025-12-08 18:55:35
-tags: 
+tags: 灵车日记
 
 ---
 

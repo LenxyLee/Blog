@@ -2,7 +2,6 @@
 title: 给Routeros安装程序加入Serial Output
 date: 2025-04-13 13:54:57
 tags: 随笔
-
 ---
 
 # 给Routeros安装程序加入Serial Output

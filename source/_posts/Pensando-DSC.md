@@ -1,7 +1,7 @@
 ---
 title: Pensando DSC
 date: 2025-08-10 21:47:00
-tags: 灵车日志
+tags: 灵车日记
 ---
 
 ## 简略且快速的记录一下

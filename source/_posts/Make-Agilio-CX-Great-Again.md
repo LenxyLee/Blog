@@ -60,7 +60,7 @@ Then use the included Netronome flashing tools to reflash the card:
 
 ![](../img/Make-Agilio-CX-Great-Again/image-20260422120533353.png)
 
-后续就简单了许多，按照文档里给的两次更新flash。（忽略nfp-flash的报错，尤其是二次刷入时flash-one.bin  是个很小的固件。一闪而过的刷新会让你觉得失败了）
+后续就简单了许多，按照文档里给的两次更新flash。*（忽略nfp-flash的报错，尤其是二次刷入时flash-one.bin  是个很小的固件。一闪而过的刷新会让你觉得失败了）*
 
 ```
 [  290.946147] Warning: Unmaintained driver is detected: nfp_main_init

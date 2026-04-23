@@ -83,6 +83,12 @@ make install
 
 随后需要配置 openssl.cnf
 
+**注意注意注意**！！！如果要在nginx中使用，下面的内容请不要配置！
+
+> Loading Engine via OpenSSL.cnf is not viable in Nginx. Please use the SSL Engine Framework which provides a more powerful and flexible mechanism to configure Nginx SSL engine such as Intel® QAT Engine directly in the Nginx configuration file (`nginx.conf`).
+>
+> 在 Nginx 中，通过 OpenSSL.cnf 加载引擎是不行的。请使用 SSL 引擎框架，该框架提供了一种更强大、更灵活的机制，可直接在 Nginx 配置文件（nginx.conf）中配置 Nginx SSL 引擎（例如 Intel® QAT 引擎）。
+
 ```
 [openssl_init]
 #providers = provider_sect
@@ -111,9 +117,7 @@ default_algorithms = ALL
      GET_NUM_REQUESTS_IN_FLIGHT, INIT_ENGINE, SET_CONFIGURATION_SECTION_NAME, 
      ENABLE_SW_FALLBACK, HEARTBEAT_POLL, DISABLE_QAT_OFFLOAD, HW_ALGO_BITMAP
      
-#可以观察到 qatengine已经被使用
-[root@adlink ~]# /usr/local/ssl/bin/openssl speed  -engine qatengine -elapsed -async_jobs 72  rsa2048
-Engine "qatengine" set.
+[root@adlink ~]# /usr/local/ssl/bin/openssl speed  -elapsed -async_jobs 72  rsa2048
 You have chosen to measure elapsed time instead of user CPU time.
 Doing 2048 bits private rsa sign ops for 10s: 593553 2048 bits private RSA sign ops in 10.00s
 Doing 2048 bits public rsa verify ops for 10s: 3672717 2048 bits public RSA verify ops in 10.00s
@@ -287,3 +291,11 @@ Transfer/sec:     50.69MB
 | Total Requests | 874,735 | 612,236 | **+42.9%** |
 | Transfer/sec | 72.30 MB/s | 50.69 MB/s | **+42.6%** |
 | Total Read | 730.02 MB | 511.14 MB | **+42.8%** |
+
+## 参考
+
+[QATlib User’s Guide](https://intel.github.io/quickassist/qatlib/index.html)
+
+[Async Mode for NGINX*](https://github.com/intel/asynch_mode_nginx)
+
+[Intel® QuickAssist Technology(QAT) OpenSSL* Engine](https://github.com/intel/qat_engine)

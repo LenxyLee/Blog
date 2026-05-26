@@ -103,25 +103,6 @@ supports-register-dump: yes
 supports-priv-flags: yes
 
 
-# modinfo fm10k
-filename:       /lib/modules/5.14.0-611.24.1.el9_7.x86_64/updates/drivers/net/ethernet/intel/fm10k/fm10k.ko
-version:        0.27.1-gs-patched
-license:        GPL v2
-description:    Intel(R) Ethernet Switch Host Interface Driver
-author:         Intel Corporation, <linux.nics@intel.com>
-rhelversion:    9.7
-srcversion:     5D36FFA1EA2C3A089BA3D92
-alias:          pci:v00008086d000015A5sv*sd*bc*sc*i*
-alias:          pci:v00008086d000015D5sv*sd*bc*sc*i*
-alias:          pci:v00008086d000015D0sv*sd*bc*sc*i*
-alias:          pci:v00008086d000015A4sv*sd*bc*sc*i*
-depends:        uio
-retpoline:      Y
-name:           fm10k
-vermagic:       5.14.0-611.24.1.el9_7.x86_64 SMP preempt mod_unload modversions 
-parm:           FTAG:FTAG Interface Enable: 0 = Ethernet Interface (default), 1 = IES Interface (array of int)
-parm:           max_vfs:Number of Virtual Functions: 0 = disable (default), 1-64 = enable this many VFs (array of int)
-parm:           RSS:Number of Receive-Side Scaling Descriptor Queues: 0 = number of cpus (default), 1-128 = number of queues (array of int)
 ```
 
 由于使用的是 Silicom 的方案，可使用其 RDIF控制工具(Silicom Linux RDI Control Utility)。该工具实现了大部分管理功能，可作为后台常驻的 daemon 运行。它通过 CLI方式向管理平面暴露 API，对下通常通过内核驱动（UIO）与数据平面交互。
@@ -157,7 +138,43 @@ Switch is UP, all ports are now enabled
 
 lPort 3和lPort 4分别是两条PCIE暴露给Host端的端口，而Port 1 和Port 2才是实际的物理端口。
 
+**这篇文章先草草收尾一下吧，因为有了新的玩具 FM10840，以及奇妙的SDK。可以做更多有趣的事情。**
 
+## 附录
 
+dmesg
 
+```
+[    5.878100] fm10k: loading out-of-tree module taints kernel.
+[    5.895679] fm10k 0000:01:00.0: 63.008 Gb/s available PCIe bandwidth (8.0 GT/s PCIe x8 link)
+[    5.895704] fm10k 0000:01:00.0: 00:e0:ed:39:90:f8
+[    5.908430] fm10k 0000:02:00.0: 31.504 Gb/s available PCIe bandwidth, limited by 8.0 GT/s PCIe x4 link at 0000:00:1c.1 (capable of 63.008 Gb/s with 8.0 GT/s PCIe x8 link)
+[    5.908462] fm10k 0000:02:00.0: 00:e0:ed:39:90:f9
+[    5.917659] fm10k 0000:02:00.0 enp2s0: renamed from eth1
+[    6.015283] fm10k 0000:01:00.0 enp1s0: renamed from eth0
+```
+
+modinfo
+
+```
+# modinfo fm10k
+filename:       /lib/modules/5.14.0-611.24.1.el9_7.x86_64/updates/drivers/net/ethernet/intel/fm10k/fm10k.ko
+version:        0.27.1-gs-patched
+license:        GPL v2
+description:    Intel(R) Ethernet Switch Host Interface Driver
+author:         Intel Corporation, <linux.nics@intel.com>
+rhelversion:    9.7
+srcversion:     5D36FFA1EA2C3A089BA3D92
+alias:          pci:v00008086d000015A5sv*sd*bc*sc*i*
+alias:          pci:v00008086d000015D5sv*sd*bc*sc*i*
+alias:          pci:v00008086d000015D0sv*sd*bc*sc*i*
+alias:          pci:v00008086d000015A4sv*sd*bc*sc*i*
+depends:        uio
+retpoline:      Y
+name:           fm10k
+vermagic:       5.14.0-611.24.1.el9_7.x86_64 SMP preempt mod_unload modversions 
+parm:           FTAG:FTAG Interface Enable: 0 = Ethernet Interface (default), 1 = IES Interface (array of int)
+parm:           max_vfs:Number of Virtual Functions: 0 = disable (default), 1-64 = enable this many VFs (array of int)
+parm:           RSS:Number of Receive-Side Scaling Descriptor Queues: 0 = number of cpus (default), 1-128 = number of queues (array of int)
+```
 

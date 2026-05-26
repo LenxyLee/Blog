@@ -97,3 +97,74 @@ Then use the included Netronome flashing tools to reflash the card:
 ## 复活吧我的网卡！
 
 ![](../img/Make-Agilio-CX-Great-Again/image-20260422123126323.png)
+
+## 后续升级
+
+这个奇妙网卡的BSP: 020028.020028.02007f 有点老，所以要做后续的升级。首先找到适配版本的bsp工具包。*最新可用的包是nfp-bsp_23.07-3.el8.x86_64.rpm*
+
+```sh
+[root@localhost bin]# ./nfp-fw-update -n 1 -c   
+
+NFP DEVICE ID:1 SMAAMDA0081-000116110061 r15
+BSP version is 020028.020028.02007f and should be 23.07-3
+CPLD version is 0x01000002 and should be 0x01030000
+Updates are required.
+Reboot required for updates to take effect.
+Updates are required.
+AC power cycle required for updates to take effect.
+[root@localhost bin]# ./nfp-fw-update -n 1 -u
+
+NFP DEVICE ID:1 SMAAMDA0081-000116110061 r15
+BSP version is 020028.020028.02007f and should be 23.07-3
+CPLD version is 0x01000002 and should be 0x01030000
+/opt/netronome/bin/nfp-cpld-prog -n1 -f/tmp/cpld.jed
+JTAG probe TAP 0 IDCODE:012b9043 (LMXO2)
+Good Transmission Checksum:0xb2ba
+image contains 1 CFG sections, totaling 699 pages
+image contains 0 UFM sections, totaling 0 pages
+
+Mach XO2 Prog Start ...
+ Checking device ID ...
+ Enable config interface TRANSPARENT MODE...
+ Erase flash ...
+ Programming CONFIG flash ...
+    programming CFG flash page     0 to   698 ...       698
+ Not programming UFM
+ Programming usercode ...
+ Checking usercode ...
+ Verifying CONFIG flash ...
+        reading CFG flash page     0 to   698 ...       698
+ Not verifying UFM
+ Writing feature row ...
+ Writing feature bits ...
+ Signaling flash program done ...
+ Checking for status done ...
+ Not writing SECURITY BIT
+ Not programming OTP fuses
+ Disabling config interface ...
+ Average CPLD busy period 17 ms
+ Total elapsed time 01:06.250
+00:00:01 [============================================================]  100%
+00:00:34 [============================================================]  100%
+Reboot required for updates to take effect.
+AC power cycle required for updates to take effect.
+[root@localhost bin]# reboot
+
+
+NFP DEVICE ID:0 SMCAMDA0099-000117341047 r11
+                 bsp.version.running:   24.07-9
+                 bsp.version.flashed:   24.07-9
+                cpld.version.running:   0x3030000
+           bspbundle.version.flashed:   bspbundle_062025094747_ebea8774
+        configurator.version.running:   AMDA-0099-0001  20200824142802
+        configurator.version.flashed:   AMDA-0099-0001  20200824142802
+
+NFP DEVICE ID:1 SMAAMDA0081-000116110061 r15
+                 bsp.version.running:   23.07-3
+                 bsp.version.flashed:   23.07-3
+                cpld.version.running:   0x1030000
+           bspbundle.version.flashed:   bspbundle_080223094102_c5a74bcd
+        configurator.version.running:   AMDA-0081-0001  20200824142802
+        configurator.version.flashed:   AMDA-0081-0001  20200824142802
+```
+

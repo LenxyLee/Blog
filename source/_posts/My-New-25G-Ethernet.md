@@ -16,7 +16,7 @@ tags: 灵车日记
 
 到手发现固件好老
 
-```bash
+```shell
 # ethtool -i 
 driver: i40e 
 version: 6.17.2-1-pve 
@@ -53,7 +53,7 @@ supports-priv-flags: yes
 
 到这就坏起来了，nvmupdate默认是不支持给第三方设备升级固件的。他会匹配Subvendor ，所以我们需要手动去构建一个nvmupdate.cfg配置文件。
 
-```bash
+```shell
 # cat nvmupdate-cross-xxv710da2.cfg
 CURRENT FAMILY: 1.0.0
 CONFIG VERSION: 1.14.0

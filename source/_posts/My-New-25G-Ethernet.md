@@ -96,9 +96,9 @@ root@pve:~/700Series/Linux_x64#
 
 ## Trex下的性能表现
 
-这就是要吐槽的内容了，XXV710的DPDK性能表现非常差，查阅Intel的文档得知64b小包只有36mpps。根本无法满足小包限速的测试需求。
+这就是要吐槽的内容了，XXV710的DPDK性能表现非常差，查阅Intel的文档得知64b小包只有37mpps。根本无法满足小包限速的测试需求。
 
-![](../img/My-New-25G-Ethernet/image-20260601185100190.png)
+![](../img/My-New-25G-Ethernet/image-20260601190711290.png)
 
 双口的情况下只能跑19Mpps  测试命令 `start -f stl/bench.py -p 0 1  -m 100% -t vm=cached,size=64`
 
